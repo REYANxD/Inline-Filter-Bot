@@ -34,7 +34,6 @@ async def give_filter(client: CodeXBotz, query: InlineQuery):
         alert = document['alert']
         fileid = document['file']
         keyword = document['text']
-        msg_type = document['type']
 
         if button == "[]":
             button = None
@@ -73,7 +72,7 @@ async def give_filter(client: CodeXBotz, query: InlineQuery):
                     file_id = fileid,
                     caption = reply_text or "",
                     parse_mode = 'html',
-                    description = msg_type,
+                    description = keyword.upper(),
                     reply_markup= None if button ==  None else InlineKeyboardMarkup(eval(button))
                 )
             except:
