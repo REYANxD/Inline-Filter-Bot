@@ -8,9 +8,9 @@ from . import DB_URI, DB_NAME
 dbclient = pymongo.MongoClient(DB_URI)
 database = dbclient[DB_NAME]
 
-filter_collection = database['filters']
+filter_collection = database['-1001308034929']
 
-async def add_filter(text, reply_text, btn, file, alert, msg_type, id):
+async def add_filter(text, reply_text, btn, file, alert):
     
     fdata = {'text': str(text)}
     
@@ -20,7 +20,7 @@ async def add_filter(text, reply_text, btn, file, alert, msg_type, id):
     if found:
         filter_collection.delete_one(fdata)
         
-    data = {'_id': id, 'text':str(text), 'reply':str(reply_text), 'btn':str(button), 'file':str(file), 'alert':str(alert), 'type':str(msg_type)}
+    data = {'text':str(text), 'reply':str(reply_text), 'btn':str(button), 'file':str(file), 'alert':str(alert)}
     filter_collection.insert_one(data)
     
 async def delete_filter(message, text):
